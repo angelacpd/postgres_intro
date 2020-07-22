@@ -1,0 +1,16 @@
+CREATE ROLE professores NOCREATEDB NOCREATETABLE INHERIT NOLOGIN NOBYPASSRLS CONNECTION LIMIT 10;
+ALTER ROLE professores PASSWORD '123';
+-- CREATE ROLE daniel LOGIN PASSWORD '123';
+-- DROP ROLE daniel;
+-- CREATE ROLE daniel LOGIN PASSWORD '123' IN ROLE professores;
+-- DROP ROLE daniel;
+-- CREATE ROLE daniel LOGIN PASSWORD '123' ROLE professores;
+
+DROP ROLE daniel;
+CREATE TABLE teste (nome varchar);
+GRANT ALL ON TABLE teste TO professores;
+CREATE ROLE daniel LOGIN INHERIT PASSWORD '123' IN ROLE professores;
+SELECT nome FROM teste;
+
+REVOKE professores FROM daniel;
+SELECT nome FROM teste;
