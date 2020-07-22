@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS bank CASCADE;
+DROP TABLE IF EXISTS agency CASCADE;
+DROP TABLE IF EXISTS client CASCADE;
+DROP TABLE IF EXISTS account CASCADE;
+DROP TABLE IF EXISTS transaction_type CASCADE;
+DROP TABLE IF EXISTS client_transactions CASCADE;
+
+
 CREATE TABLE IF NOT EXISTS bank(
 	bank_number INTEGER NOT NULL,
 	bank_name VARCHAR(50) NOT NULL,
@@ -37,14 +45,14 @@ CREATE TABLE IF NOT EXISTS account(
 	FOREIGN KEY (client_number_acc) REFERENCES client (client_number)
 );
 
-CREATE TABLE transaction_type(
-	id SMALLINT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS transaction_type(
+	id SMALLSERIAL PRIMARY KEY,
 	transaction_name VARCHAR(50) NOT NULL,
 	trans_active BOOLEAN NOT NULL DEFAULT TRUE,
 	created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE client_transactions(
+CREATE TABLE IF NOT EXISTS client_transactions(
 	id BIGSERIAL PRIMARY KEY,
 	bank_number INTEGER NOT NULL,
 	agency_number INTEGER NOT NULL,
